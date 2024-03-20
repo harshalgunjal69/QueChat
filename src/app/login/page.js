@@ -30,7 +30,7 @@ export default function Login() {
             toast.success('Logged in successfully');
             setTimeout(() => {
                 router.push('/');
-            }, 2000);
+            }, 1000);
         } catch (error) {
             const errorCode = error.code;
             const errorMessage = error.message;
@@ -44,6 +44,10 @@ export default function Login() {
             }
             if (errorCode === 'auth/invalid-email') {
                 toast.error('Invalid email');
+                return;
+            }
+            if (errorCode === 'auth/invalid-credential') {
+                toast.error('Invalid credential');
                 return;
             }
             toast.error(errorMessage);
@@ -62,7 +66,7 @@ export default function Login() {
             toast.success('Logged in successfully');
             setTimeout(() => {
                 router.push('/');
-            }, 2000);
+            }, 1000);
             
         } catch (error) {
             const errorCode = error.code;

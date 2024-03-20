@@ -91,7 +91,7 @@ export default function Login() {
             </p>
             <Card className="mx-auto max-w-xs md:max-w-md lg:max-w-2xl shadow-lg">
                 <CardHeader className="space-y-1">
-                    <CardTitle className="text-2xl font-bold">Login</CardTitle>
+                    <CardTitle className="text-2xl font-bold">SignUp</CardTitle>
                     <CardDescription>
                         Enter your email and password to create a new account
                     </CardDescription>
@@ -149,6 +149,15 @@ export default function Login() {
                             <HiOutlineMail className="inline-block mr-2" />
                             SignUp
                         </Button>
+                        <p className="mt-10 text-center text-sm text-gray-400">
+                            Already a member?{' '}
+                            <button
+                                onClick={() => router.push('login')}
+                                className="font-semibold leading-6 text-indigo-400 hover:text-indigo-300"
+                            >
+                                Login
+                            </button>
+                        </p>
                     </div>
                 </CardContent>
             </Card>

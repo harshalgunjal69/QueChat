@@ -1,6 +1,7 @@
 import './globals.css';
 import { Inter, Roboto_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
+import { Toaster } from '@/components/ui/sonner';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -26,11 +27,9 @@ export default function RootLayout({ children }) {
             <body
                 className={`${inter.variable} ${roboto_mono.variable} font-sans`}
             >
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="dark"
-                >
-                    {children}
+                <ThemeProvider attribute="class" defaultTheme="dark">
+                        {children}
+                        <Toaster richColors />
                 </ThemeProvider>
             </body>
         </html>

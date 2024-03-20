@@ -12,85 +12,60 @@ import { Button } from '@/components/ui/button';
 import { FcGoogle } from 'react-icons/fc';
 import { HiOutlineMail } from 'react-icons/hi';
 import { auth } from '@/lib/utils';
-import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordAgain, setPasswordAgain] = useState('');
     const router = useRouter();
 
-    const handleLoginWithEmail = async () => {
-        try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-            toast.success('Logged in successfully');
-            setTimeout(() => {
-                router.push('/');
-            }, 2000);
-        } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            if (errorCode === 'auth/user-not-found') {
-                toast.error('User not found');
-                return;
-            }
-            if (errorCode === 'auth/wrong-password') {
-                toast.error('Wrong password');
-                return;
-            }
-            if (errorCode === 'auth/invalid-email') {
-                toast.error('Invalid email');
-                return;
-            }
-            toast.error(errorMessage);
-        }
-    }
-    
+    const clearInputs = () => {
+        setEmail('');
+        setPassword('');
+        setPasswordAgain('');
+        // now to clear the inputs in the ui
+        document.getElementById('email').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('passwordAgain').value = '';
+    };
 
-    const handleGoogleLogin = async () => {
-        const provider = new GoogleAuthProvider();
-        try {
-            const userCredential = await signInWithPopup(auth, provider);
-            const {
-                displayName: name, email, photoUrl: profileImage
-            } = userCredential.user;
-            console.log(name, email, profileImage);
-            toast.success('Logged in successfully');
-            setTimeout(() => {
-                router.push('/');
-            }, 2000);
-            
-        } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            if (errorCode === 'auth/popup-closed-by-user') {
-                toast.error('Popup closed by user');
-                return;
-            }
-            if (errorCode === 'auth/popup-blocked') {
-                toast.error('Popup blocked');
-                return;
-            }
-            if (errorCode === 'auth/operation-not-allowed') {
-                toast.error('Operation not allowed');
-                return;
-            }
-            if (errorCode === 'auth/user-disabled') {
-                toast.error('User disabled');
-                return;
-            }
-            toast.error(errorMessage);
-        }
-
-        try {
-
-        } catch (error) {
-
-        }
+    const signup = () => {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                toast.success('Account created successfully');
+                setTimeout(() => {
+                    toast('Redirecting to login page');
+                }, 2000);
+                setTimeout(() => {
+                    router.push('/login');
+                }, 2000);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                if (errorCode === 'auth/email-already-in-use') {
+                    toast.error('Email already in use');
+                    clearInputs()
+                    return;
+                }
+                if (errorCode === 'auth/invalid-email') {
+                    toast.error('Invalid email');
+                    clearInputs()
+                    return;
+                }
+                if (errorCode === 'auth/weak-password') {
+                    toast.error('Password should be atleast 6 characters long');
+                    clearInputs()
+                    return;
+                }
+                toast.error(errorMessage);
+            });
     };
     return (
         <div className="flex flex-wrap flex-col justify-center items-center h-screen">
@@ -118,7 +93,7 @@ export default function Login() {
                 <CardHeader className="space-y-1">
                     <CardTitle className="text-2xl font-bold">Login</CardTitle>
                     <CardDescription>
-                        Enter your email and password to login to your account
+                        Enter your email and password to create a new account
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -146,36 +121,33 @@ export default function Login() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                        <p className="mt-10 text-center text-sm text-gray-400">
-                            Not a member?{' '}
-                            <button
-                                onClick={() => router.push('signup')}
-                                className="font-semibold leading-6 text-indigo-400 hover:text-indigo-300"
-                            >
-                                Sign Up
-                            </button>
-                        </p>
+                        <div className="space-y-2">
+                            <Label htmlFor="password">Password Confirm</Label>
+                            <Input
+                                id="passwordAgain"
+                                placeholder="Enter Your Password Again"
+                                name="passwordAgain"
+                                type="password"
+                                autoComplete="current-password"
+                                required
+                                onChange={(e) =>
+                                    setPasswordAgain(e.target.value)
+                                }
+                            />
+                        </div>
                         <Button
-                            onClick={() => handleLoginWithEmail()}
-                            className="w-full"
+                            disabled={
+                                !email ||
+                                !password ||
+                                !passwordAgain ||
+                                password !== passwordAgain
+                            }
+                            onClick={() => signup()}
+                            className="w-full disabled:opacity-50"
                             type="submit"
                         >
                             <HiOutlineMail className="inline-block mr-2" />
-                            Login with Email
-                        </Button>
-                        <div className="flex items-center space-x-2">
-                            <hr className="flex-1" />
-                            <span className="text-gray-500">or</span>
-                            <hr className="flex-1" />
-                        </div>
-                        <Button
-                            className="w-full"
-                            onClick={() => {
-                                handleGoogleLogin();
-                            }}
-                        >
-                            <FcGoogle className="inline-block mr-2" />
-                            Login with Google
+                            SignUp
                         </Button>
                     </div>
                 </CardContent>

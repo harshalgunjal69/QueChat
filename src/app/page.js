@@ -25,7 +25,7 @@ function Home() {
             .then(() => {
                 // Sign-out successful.
                 router.push('/login');
-                toast.success('Signed out successfully');
+                toast.success('Logged out successfully');
             })
             .catch((error) => {
                 // An error happened.

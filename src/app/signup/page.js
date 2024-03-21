@@ -70,11 +70,11 @@ export default function Login() {
     return (
         <div className="flex flex-wrap flex-col justify-center items-center h-screen">
             <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-8">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-12">
                 <span>
                     <Image
                         src={'/thunder.png'}
-                        alt='logo'
+                        alt="logo"
                         height={80}
                         width={80}
                         priority={true}
@@ -145,11 +145,11 @@ export default function Login() {
                             <HiOutlineMail className="inline-block mr-2" />
                             SignUp
                         </Button>
-                        <p className="mt-10 text-center text-sm text-gray-400">
+                        <p className="mt-10 text-center text-sm text-muted-foreground">
                             Already a member?{' '}
                             <button
                                 onClick={() => router.push('login')}
-                                className="font-semibold leading-6 text-indigo-400 hover:text-indigo-300"
+                                className="font-semibold leading-6 text-primary-foreground hover:text-primary-foreground/80 hover:underline transition-all duration-75"
                             >
                                 Login
                             </button>

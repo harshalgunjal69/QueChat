@@ -104,11 +104,11 @@ export default function Login() {
     return (
         <div className="flex flex-wrap flex-col justify-center items-center h-screen">
             <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-8 md:mb-8">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-12">
                 <span>
                     <Image
                         src={'/thunder.png'}
-                        alt='logo'
+                        alt="logo"
                         height={80}
                         width={80}
                         priority={true}
@@ -152,11 +152,11 @@ export default function Login() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                        <p className="mt-10 text-center text-sm text-gray-400">
+                        <p className="mt-10 text-center text-sm text-muted-foreground">
                             Not a member?{' '}
                             <button
                                 onClick={() => router.push('signup')}
-                                className="font-semibold leading-6 text-indigo-400 hover:text-indigo-300"
+                                className="font-semibold leading-6 text-primary-foreground hover:text-primary-foreground/80 hover:underline transition-all duration-75"
                             >
                                 Sign Up
                             </button>
@@ -171,13 +171,10 @@ export default function Login() {
                         </Button>
                         <div className="flex items-center space-x-2">
                             <hr className="flex-1" />
-                            <span className="text-gray-500">or</span>
+                            <span className="text-muted-foreground">or</span>
                             <hr className="flex-1" />
                         </div>
-                        <Button
-                            className="w-full"
-                            onClick={handleGoogleLogin}
-                        >
+                        <Button className="w-full" onClick={handleGoogleLogin}>
                             <FcGoogle className="inline-block mr-2" />
                             Login with Google
                         </Button>

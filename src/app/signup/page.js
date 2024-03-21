@@ -51,17 +51,17 @@ export default function Login() {
                 const errorMessage = error.message;
                 if (errorCode === 'auth/email-already-in-use') {
                     toast.error('Email already in use');
-                    clearInputs()
+                    clearInputs();
                     return;
                 }
                 if (errorCode === 'auth/invalid-email') {
                     toast.error('Invalid email');
-                    clearInputs()
+                    clearInputs();
                     return;
                 }
                 if (errorCode === 'auth/weak-password') {
                     toast.error('Password should be atleast 6 characters long');
-                    clearInputs()
+                    clearInputs();
                     return;
                 }
                 toast.error(errorMessage);

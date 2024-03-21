@@ -1,14 +1,13 @@
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { getApp, getApps, initializeApp } from 'firebase/app';
-import {getAuth } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { PrismaClient } from '@prisma/client';
 import crypto_1 from 'crypto';
 
 export function cn(...inputs) {
     return twMerge(clsx(inputs));
 }
-
 
 let prismaInstance = null;
 
@@ -18,7 +17,6 @@ export function getPrismaInstance() {
     }
     return prismaInstance;
 }
-
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -32,8 +30,6 @@ const firebaseConfig = {
 
 export const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-
-
 
 var ErrorCode; // Define enum for error codes
 (function (ErrorCode) {
@@ -152,4 +148,3 @@ export function generateToken04(
     // console.log('-----------------');
     return '04' + Buffer.from(dv.buffer).toString('base64'); // Return final token string in Base64 format
 }
-

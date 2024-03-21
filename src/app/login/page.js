@@ -12,7 +12,11 @@ import { Button } from '@/components/ui/button';
 import { FcGoogle } from 'react-icons/fc';
 import { HiOutlineMail } from 'react-icons/hi';
 import { auth } from '@/lib/utils';
-import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+    GoogleAuthProvider,
+    signInWithPopup,
+    signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -25,7 +29,11 @@ export default function Login() {
 
     const handleLoginWithEmail = async () => {
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const userCredential = await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
             const user = userCredential.user;
             toast.success('Logged in successfully');
             setTimeout(() => {
@@ -52,22 +60,22 @@ export default function Login() {
             }
             toast.error(errorMessage);
         }
-    }
-    
+    };
 
     const handleGoogleLogin = async () => {
         const provider = new GoogleAuthProvider();
         try {
             const userCredential = await signInWithPopup(auth, provider);
             const {
-                displayName: name, email, photoUrl: profileImage
+                displayName: name,
+                email,
+                photoUrl: profileImage,
             } = userCredential.user;
             console.log(name, email, profileImage);
             toast.success('Logged in successfully');
             setTimeout(() => {
                 router.push('/');
             }, 1000);
-            
         } catch (error) {
             const errorCode = error.code;
             const errorMessage = error.message;
@@ -91,15 +99,12 @@ export default function Login() {
         }
 
         try {
-
-        } catch (error) {
-
-        }
+        } catch (error) {}
     };
     return (
         <div className="flex flex-wrap flex-col justify-center items-center h-screen">
             <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-8 md:mb-3">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-8 md:mb-8">
                 <span>
                     <Image
                         src={'/thunder.png'}
@@ -113,11 +118,7 @@ export default function Login() {
                     QueChat
                 </span>
             </h1>
-            <p className="hidden sm:flex sm:text-xl md:text-[1.35rem] max-w-xl md:max-w-2xl text-center text-muted-foreground mb-16">
-                Your all-in-one solution for real-time chat, video, and voice
-                calls. Connect with anyone, anywhere, and stay in touch
-                effortlessly.
-            </p>
+
             <Card className="mx-auto max-w-xs md:max-w-md lg:max-w-2xl shadow-lg">
                 <CardHeader className="space-y-1">
                     <CardTitle className="text-2xl font-bold">Login</CardTitle>

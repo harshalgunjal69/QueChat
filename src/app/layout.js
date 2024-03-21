@@ -28,8 +28,8 @@ export default function RootLayout({ children }) {
                 className={`${inter.variable} ${roboto_mono.variable} font-sans`}
             >
                 <ThemeProvider attribute="class" defaultTheme="dark">
-                        {children}
-                        <Toaster richColors />
+                    {children}
+                    <Toaster richColors />
                 </ThemeProvider>
             </body>
         </html>

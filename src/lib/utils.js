@@ -2,20 +2,10 @@ import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { PrismaClient } from '@prisma/client';
 import crypto_1 from 'crypto';
 
 export function cn(...inputs) {
     return twMerge(clsx(inputs));
-}
-
-let prismaInstance = null;
-
-export function getPrismaInstance() {
-    if (!prismaInstance) {
-        prismaInstance = new PrismaClient();
-    }
-    return prismaInstance;
 }
 
 const firebaseConfig = {
@@ -30,6 +20,8 @@ const firebaseConfig = {
 
 export const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+
+
 
 var ErrorCode; // Define enum for error codes
 (function (ErrorCode) {

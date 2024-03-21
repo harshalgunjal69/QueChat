@@ -1,4 +1,4 @@
-import { getPrismaInstance } from '@/lib/utils';
+import { getPrismaInstance } from '@/lib/prisma';
 
 export const checkUser = async (req, res, next) => {
     try {

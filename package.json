@@ -2,6 +2,7 @@
     "name": "quechat",
     "version": "0.1.0",
     "private": true,
+    "license": "MIT",
     "scripts": {
         "dev": "next",
         "build": "npx prisma migrate deploy && next build",
@@ -16,7 +17,6 @@
         "axios": "^1.6.8",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.0",
-        "crypto": "^1.0.1",
         "dotenv": "^16.4.5",
         "emoji-picker-react": "^4.8.0",
         "firebase": "^10.9.0",

@@ -108,6 +108,7 @@ export default function Login() {
                 <span>
                     <Image
                         src={'/thunder.png'}
+                        alt='logo'
                         height={80}
                         width={80}
                         priority={true}
@@ -161,7 +162,7 @@ export default function Login() {
                             </button>
                         </p>
                         <Button
-                            onClick={() => handleLoginWithEmail()}
+                            onClick={handleLoginWithEmail}
                             className="w-full"
                             type="submit"
                         >
@@ -175,9 +176,7 @@ export default function Login() {
                         </div>
                         <Button
                             className="w-full"
-                            onClick={() => {
-                                handleGoogleLogin();
-                            }}
+                            onClick={handleGoogleLogin}
                         >
                             <FcGoogle className="inline-block mr-2" />
                             Login with Google

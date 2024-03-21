@@ -2,7 +2,7 @@ import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import crypto_1 from 'crypto';
+import crypto from 'crypto';
 
 export function cn(...inputs) {
     return twMerge(clsx(inputs));
@@ -61,7 +61,7 @@ function getAlgorithm(keyBase64) {
 }
 // AES encryption function using CBC/PKCS5Padding mode
 function aesEncrypt(plainText, key, iv) {
-    var cipher = crypto_1.createCipheriv(getAlgorithm(key), key, iv);
+    var cipher = crypto.createCipheriv(getAlgorithm(key), key, iv);
     cipher.setAutoPadding(true);
     var encrypted = cipher.update(plainText);
     var final = cipher.final();

@@ -70,10 +70,11 @@ export default function Login() {
     return (
         <div className="flex flex-wrap flex-col justify-center items-center h-screen">
             <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-8 md:mb-3">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-8">
                 <span>
                     <Image
                         src={'/thunder.png'}
+                        alt='logo'
                         height={80}
                         width={80}
                         priority={true}
@@ -84,11 +85,6 @@ export default function Login() {
                     QueChat
                 </span>
             </h1>
-            <p className="hidden sm:flex sm:text-xl md:text-[1.35rem] max-w-xl md:max-w-2xl text-center text-muted-foreground mb-16">
-                Your all-in-one solution for real-time chat, video, and voice
-                calls. Connect with anyone, anywhere, and stay in touch
-                effortlessly.
-            </p>
             <Card className="mx-auto max-w-xs md:max-w-md lg:max-w-2xl shadow-lg">
                 <CardHeader className="space-y-1">
                     <CardTitle className="text-2xl font-bold">SignUp</CardTitle>
